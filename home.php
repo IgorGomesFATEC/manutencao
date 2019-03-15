@@ -173,7 +173,8 @@ include_once 'includes/footer.php';
         dataType:'json',
         success:function(data){
           var $pronto = $(this);
-          var $i = data(id)
+          var $i = $(this).data("id")
+          console.log(i)
           while(data.ordem_servico =! null)
           {
             console.log(data.ordem_servico);
