@@ -26,8 +26,8 @@ include_once 'includes/header.php';
           <p>CEP: <?php echo $dados['CEP'];?></p>
           <p>Funcionario: <?php echo $dados['funcionario']?></p>
           <div class="card-action grey lighten-3">
-          <a class="btn-floating btn-small green" id = "ok"><i class="material-icons">check</i></a>
-          <a class="btn-floating btn-small red" id = "manutencao"><i class="material-icons">clear</i></a>
+          <a class="btn-floating btn-small green ok" data-id="<?php echo $dados['ordem_servico']; ?>"id="<?php echo $dados['ordem_servico']; ?>"><i class="material-icons">check</i></a>
+          <a class="btn-floating btn-small red manutencao" data-id="<?php echo $dados['ordem_servico']; ?>" id="<?php echo $dados['ordem_servico']; ?>"><i class="material-icons">clear</i></a>
           <div class="right" id="divBtnEdit">
           <button class ="btn-floating btn-small orange modal-trigger Editar"  data-id = "1" href = "#modal1"><i class="material-icons">edit</i></button> 
           <a class ="btn-floating btn-small grey darken-1 " href=""><i class="material-icons ">delete</i></a>
@@ -164,20 +164,36 @@ include_once 'includes/footer.php';
         error:function(err){
           console.log(err);
         }
-    });
-    $("#pronto").change(function(){
-      var $pronto = $(this);
-      if($pronto.prop("checked") == false)
+    })
+  });
+    $("#Feito").on("click",function(){
+      $.ajax({
+        type: 'POST',
+        url:'home_ajax',
+        dataType:'json',
+        success:function(data){
+          var $pronto = $(this);
+          var $i = data(id)
+          while(data.ordem_servico =! null)
           {
-            $("#manutencao").show();
-            $("#ok").hide();
+            console.log(data.ordem_servico);
+          }
+          if($pronto.prop("checked") == false)
+          {
+            $(".manutencao").show();
+            $(".ok").hide();
             alert("nao esta checado");
           }
           else
           {
-            $("#manutencao").hide();
-            $("#ok").show();
+            $(".manutencao").hide();
+            $(".ok").show();
             alert("checado");
           }
+        },
+        error:function(err){
+          console.log(err);
+        }
+      })
     })
 </script>
