@@ -56,13 +56,13 @@ function cad_PC($escola,$patrimonio,$marca,$modelo,$funcionario,$descricao,$prob
 		$resultado_count_func = mysqli_fetch_row(mysqli_query($connect,$count_func));
 		if($resultado_count_func[0]!=0)
 		{
-			$count_pat = "SELECT COUNT(*) FROM maquina WHERE (PATRIMONIO = '$patrimonio')";
+			$count_pat = "SELECT COUNT(*) FROM maquina_escola WHERE (PATRIMONIO = '$patrimonio')";
 			$resultado_count_pat = mysqli_fetch_row(mysqli_query($connect,$count_pat));
 			if($resultado_count_pat[0]==0)
 			{
 				$id_escola = "SELECT ID_ESCOLA FROM ESCOLA WHERE (NOME = '$escola')";
 				$resultado_id_escola = mysqli_fetch_row(mysqli_query($connect,$id_escola));
-				$add_maquina = "INSERT INTO maquina (PATRIMONIO,ID_ESCOLA,MARCA,MODELO,descricao) values ('$patrimonio','$resultado_id_escola[0]','$marca','$modelo','$descricao')";
+				$add_maquina = "INSERT INTO maquina_escola (PATRIMONIO,ID_ESCOLA,MARCA,MODELO,descricao) values ('$patrimonio','$resultado_id_escola[0]','$marca','$modelo','$descricao')";
 				if(mysqli_query($connect,$add_maquina))
 				{
 					$id_func = "SELECT ID_FUNCIONARIO FROM funcionario WHERE (NOME = '$funcionario')";

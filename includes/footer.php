@@ -23,7 +23,7 @@
           </div>
         </footer>
         <div class="fixed-action-btn ">
-		<a class="btn-floating btn-large green darken-2">
+		<a class="btn-floating btn-large green darken-2" href="https://educacao.riopreto.br/helpdesk/login.php">
 		<i class="large material-icons">call</i>
 		</a>
 		</div>
