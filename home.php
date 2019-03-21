@@ -30,7 +30,7 @@ include_once 'includes/header.php';
           <a class="btn-floating btn-small red manutencao" data-id="<?php echo $dados['ordem_servico']; ?>" id="<?php echo $dados['ordem_servico']; ?>"><i class="material-icons">clear</i></a>
           <div class="right" id="divBtnEdit">
           <a class ="btn-floating btn-small orange modal-trigger Editar"  data-id = "1" href = "manutencao.php"><i class="material-icons">edit</i></a> 
-          <button class ="btn-floating btn-small grey darken-1 modal-trigger" href="#modal1"><i class="material-icons ">delete</i></button> 
+          <button class ="btn-floating btn-small grey darken-1 modal-trigger enviar" href="#modal1"><i class="material-icons ">delete</i></button> 
           </div>
           </div>
 
@@ -50,7 +50,7 @@ include_once 'includes/header.php';
 
     <!-- Modal Structure -->
     <form class="col s12 " action="CRUD/delete.php" method="POST"> 
-    <div id="modal1" class="modal modal-fixed-footer">
+    <div id="modal1" class="modal">
       <div class="modal-content">
         
         <h4>Encerrar ordem de serviço</h4>
@@ -58,14 +58,13 @@ include_once 'includes/header.php';
           <div class="row">
             <div class="col s12">
               <div class="row">
-                <div class="input-field col s12">
-                  <textarea id="descricao" type="text" class="materialize-textarea validate" name="descricao"></textarea> 
-                  <label for="descricao">Descrição do serviço</label>
-                </div>
+                <p class="flow-text">
+                  Você tem certeza que quer fechar a ordem de serviço?
+                </p>
               </div>
               <div class="row">
                 <div class="input-field col s1">
-                  <input type="text" name="patrimonio" id="Patrimonio">
+                  <input type="text" name="patrimonio" id="Patrimonio" class="Patrimonio">
                 </div>
                 <div class="input-field col s1">
                   <input type="text" name="ordem_servico" id="ordem_servico">
