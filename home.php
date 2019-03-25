@@ -47,54 +47,29 @@ include_once 'includes/header.php';
 
 </div>
 <div class="row"> <a class="waves-effect waves-teal btn-floating right" id="form" href="cadPC.php"><i class="material-icons">add</i></a></div>
-
-    <!-- Modal Structure -->
-    <form class="col s12 " action="CRUD/delete.php" method="POST"> 
-    <div id="modal1" class="modal">
-      <div class="modal-content">
-        
-        <h4>Encerrar ordem de serviço</h4>
-          <!-- Page Layout here -->
-          <div class="row">
-            <div class="col s12">
-              <div class="row">
-                <p class="flow-text">
-                  Você tem certeza que quer fechar a ordem de serviço?
-                </p>
-              </div>
-              <div class="row">
-                <div class="input-field col s1">
-                  <input type="text" name="patrimonio" id="Patrimonio" class="Patrimonio">
-                </div>
-                <div class="input-field col s1">
-                  <input type="text" name="ordem_servico" id="ordem_servico">
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <a name="btn-atuliza-PC" class="modal-close waves-effect waves-green btn-flat" id="Feito">Feito!</a>
-        
-      </div>
-    </div>
-    </form>
 <?php
 //footer
 include_once 'includes/footer.php';
 ?>
 <script type="text/javascript">
   $(document).ready(function(){$('.modal').modal();});
-/*  $('.Editar').click(function(){
-    var id = $(this).data('id');
-    alert("id: "+id);
-  });*/
-  /*$('.Editar').on('click', function(){ // vamos buscar o valor do atributo data-name que temos no botão que foi clicado
-          var id = $(this).data('id'); // vamos buscar o valor do atributo data-id
-          $('span.nome').text(nome+ ' (id = ' +id+ ')'); // inserir na o nome na pergunta de confirmação dentro da modal
-          //$('a.delete-yes').attr('href', 'apagar.php?id=' +id); // mudar dinamicamente o link, href do botão confirmar da modal
-          $('#modal1').modal('show'); // modal aparece
-    });*/
-
+  $("#divBtnEdit button").on("click", function(e){
+ $.ajax({
+        type:'POST',
+        url:'home_ajax.php',
+        dataType:'json',
+        success:function(data){
+         for(var i=0;i<data.length;i++)
+          {
+            $("#Patrimonio").val(data[i].patrimonio);
+            $("#ordem_servico").val(data[i].ordem_servico)
+            //$("#Patrimonio").hide();
+            //$("#ordem_servico").hide();
+          }
+        },
+        error:function(err){
+          console.log(err);
+        }
+    })
+  });
 </script>
-<script type="text/javascript" src="js/script.js"></script>

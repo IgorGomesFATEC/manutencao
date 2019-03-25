@@ -7,9 +7,11 @@
             INNER JOIN escola e ON m.id_escola = e.id_escola
             INNER JOIN ordem_servico o ON o.PATRIMONIO_MAQUINA = m.PATRIMONIO
             INNER JOIN funcionario f ON o.ID_FUNCIONARIO = f.ID_FUNCIONARIO;";
-    $resultado = mysqli_query($connect, $sql);
-    $dados = mysqli_fetch_array($resultado);
+    $resultado = mysqli_query($connect, $sql); 
+    while($dados = mysqli_fetch_assoc($resultado)){
+        $vetor[] = array_map('utf8_encode', $dados); 
+    }    
 
-    echo json_encode($dados);
+    echo json_encode($vetor);
         
 ?>
