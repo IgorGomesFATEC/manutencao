@@ -1,5 +1,8 @@
 <?php
 require_once 'CRUD/bd_connect.php';
+
+header("Content-Type: application/json; charset=UTF-8");
+
     
  /*   //Consultando banco de dados
 	$sql = "SELECT * 
@@ -14,30 +17,39 @@ require_once 'CRUD/bd_connect.php';
     //Passando vetor em forma de json
     echo json_encode($vetor);
 */
+  
 
+if(isset($_REQUEST['pecas'])){
+ $search = $_REQUEST['pecas'];
 
-/*if(isset($_POST['search'])){
- $search = $_POST['search'];
-
- $query = "SELECT * FROM PECAS WHERE DESCRICAO LIKE '%".$search."'";
- $result = mysqli_query($con,$query);
+ $query = "SELECT id_pecas, 
+                  descricao
+             FROM PECAS WHERE DESCRICAO LIKE '%".$search."%'";
+ $result = mysqli_query($connect,$query);
 
  $response = array();
- while($row = mysqli_fetch_array($result) ){
-   $response[] = array("value"=>$row['id_pecas'],"label"=>$row['descricao']);
+ 
+ //var_dump(mysqli_fetch_array($result));
+
+ while($row = mysqli_fetch_array($result))
+ {
+  $response[$row['descricao']] = $row["id_pecas"]; 
+
+  //array("id" => $row['id_pecas'], "value" =>$row['descricao']));
  }
 
- echo json_encode($response);
+
+
+ echo json_encode( $response );
 }
 
-exit;*/
+
+exit;
 
 
 
-
-$search = mysqli_escape_string($connect,$_GET['pecas']);
+/*$search = mysqli_escape_string($connect,$_GET['pecas']);
 $qr = "SELECT * FROM PECAS WHERE DESCRICAO LIKE '%.$search.' ORDER BY DESCRICAO ASC";
-var_dump($qr);
 $ex = mysqli_query($connect, $qr);
 
 
@@ -57,4 +69,4 @@ while ($res = mysqli_fetch_assoc($ex)) {
 }
 
 $resJson .= ']';
-echo $resJson;
+echo $resJson;*/

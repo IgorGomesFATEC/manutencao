@@ -63,15 +63,35 @@ include_once 'includes/footer.php'
 ?>
 <script type="text/javascript">
 //TODO tentar alimentar a tabela com ajax
+
+
+
 $(document).ready(function(){
-    $('#pecas').autocomplete({
-	source: 'get-pecas.php',
-	data:{
-		for (i = 0) {
-			Things[i]
-		},
-	},
+  
+  var dados;
+  $.ajax({
+	type:'POST',
+	url: 'get-pecas.php?pecas=Memoria',
+	dataType:'json',
+	async:false,
+	success: function(data){
+  	   dados = data;
+ 	},
+	error: function(err){
+	   console.log(err.responseText);
+	}
   });
+
+  console.log(dados);
+  
+
+  $('#pecas').autocomplete({
+	source: 'get-pecas.php',
+	data:dados
+  });
+
+
+
 });
  /*$(document).ready(function(){
     $('#pecas').autocomplete({
