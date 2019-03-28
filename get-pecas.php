@@ -21,10 +21,13 @@ header("Content-Type: application/json; charset=UTF-8");
 
 if(isset($_REQUEST['pecas'])){
  $search = $_REQUEST['pecas'];
+ $query = "SELECT 	e.id_itens,
+					p.descricao
+					FROM itens_sme p
+					INNER JOIN estoque e ON  p.id_itens = e.id_itens	
+					WHERE p.descricao LIKE '%".$search."%' and e.qtd>0";
 
- $query = "SELECT id_pecas, 
-                  descricao
-             FROM PECAS WHERE DESCRICAO LIKE '%".$search."%'";
+
  $result = mysqli_query($connect,$query);
 
  $response = array();
@@ -33,7 +36,7 @@ if(isset($_REQUEST['pecas'])){
 
  while($row = mysqli_fetch_array($result))
  {
-  $response[$row['descricao']] = $row["id_pecas"]; 
+  $response[$row['descricao']] = null;
 
   //array("id" => $row['id_pecas'], "value" =>$row['descricao']));
  }

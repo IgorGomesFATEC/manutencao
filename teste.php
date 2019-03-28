@@ -6,45 +6,16 @@ include_once 'includes/header.php';
 ?>
 <div class="row">
   <?php
-    $sql = "SELECT e.NOME escola,m.patrimonio patrimonio,o.HR_CHEGADA chegada ,e.TELEFONE telefone,e.CEP,f.NOME funcionario,o.problema
-            FROM maquina m
-            INNER JOIN escola e ON m.id_escola = e.id_escola
-            INNER JOIN ordem_servico o ON o.PATRIMONIO_MAQUINA = m.PATRIMONIO
-            INNER JOIN funcionario f ON o.ID_FUNCIONARIO = f.ID_FUNCIONARIO;";
+    $sql = "SELECT id_itens,qtd FROM pecas_utilizadas WHERE id_ordem_servico =  1";
     $resultado = mysqli_query($connect, $sql);
-     while ($dados = mysqli_fetch_array($resultado)) 
-     {             
-  ?>
-      <div class="col s3">
-       <div class="card small">
-        <div class="card-content">
-          <span class="card-title activator grey-text text-darken-4"><?php echo $dados['escola'];?><i class="material-icons right">more_vert</i></span>
-          <hr>
-          <br>
-          <p>Patrimonio: <?php echo $dados['patrimonio'];?></p>
-          <p>Data de Entrada: <?php echo $dados['chegada'];?></p>
-          <p>Telefone da Escola: <?php echo $dados['telefone'];?></p>
-          <p>CEP: <?php echo $dados['CEP'];?></p>
-          <p>Funcionario: <?php echo $dados['funcionario']?></p>
-          <div class="card-action grey lighten-3">
-          <a class="btn-floating btn-small green"><i class="material-icons">check</i></a>
-          <a class="btn-floating btn-small red"><i class="material-icons">clear</i></a>
-          <div class="right">
-          <a class ="btn-floating btn-small orange " href=""><i class="material-icons">edit</i></a>
-          <a class ="btn-floating btn-small grey darken-1 " href=""><i class="material-icons ">delete</i></a>
-          </div>
-          </div>
-
-        </div>
-        
-
-        <div class="card-reveal">
-          <span class="card-title grey-text text-darken-4">Problema<i class="material-icons right">close</i></span>
-          <p><?php echo $dados['problema']?></p>
-        </div>
-      </div>
-      </div>
-<?php }?>
+      while ($dados = mysqli_fetch_array($resultado)) 
+      {             
+          echo $dados['qtd'];
+          echo "<hr>";
+          echo "aaa ".$dados['id_itens']." aaa";
+          $dec_estoque = "UPDATE estoque SET qtd = qtd - ".$dados['qtd']." WHERE id_itens = ".$dados['id_itens']."";
+          echo($dec_estoque);
+      }?>
 
 </div>
 <div class="row"> <a class="waves-effect waves-teal btn-floating right" id="form" href="cadPC.php"><i class="material-icons">add</i></a></div>

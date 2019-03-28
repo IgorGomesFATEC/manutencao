@@ -47,7 +47,7 @@ include_once 'includes/header.php';
 
 	        <tbody>
 	        	<?php
-	        	$sql = "SELECT pecas.marca, pecas.modelo, pecas.descricao, estoque.qtd FROM pecas INNER JOIN estoque ON estoque.id_pecas = pecas.id_pecas";
+	        	$sql = "SELECT itens_sme.marca, itens_sme.modelo, itens_sme.descricao, estoque.qtd FROM itens_sme INNER JOIN estoque ON estoque.id_itens = itens_sme.id_itens ORDER BY estoque.qtd ASC";
 	        	$resultado = mysqli_query($connect, $sql);
 	        	while ($dados = mysqli_fetch_array($resultado)) {
 	        			        	
